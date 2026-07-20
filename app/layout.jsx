@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "A Full Service Digital Agency | IT Company",
+  title: "Crown Peak Global | A Full Service Digital Agency",
   description: "Digital Solutions for Business Growth.",
   icons: { icon: "/favicon.png" },
 };

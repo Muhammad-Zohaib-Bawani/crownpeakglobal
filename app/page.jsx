@@ -1,6 +1,6 @@
 import Script from "next/script";
 
-// Verbatim TechnoBeavers homepage markup. Rendered as raw HTML so the original
+// Verbatim Crown Peak Global homepage markup. Rendered as raw HTML so the original
 // vendor CSS (served from /public) styles it 1:1. Analytics / FB-chat / inline
 // <script> tags were stripped — JS is loaded in order by the loader below.
 // ponytail: clone, not a rewrite — hand-porting 500 lines to JSX buys nothing.
@@ -36,9 +36,9 @@ const HOME_HTML = `
       </ul>
     </nav>
     <ul class="header-icons animate fadeInLeft animated" data-animation="fadeInLeft" data-duration="1500">
-      <li><a href="https://www.facebook.com/TechnoBeavers/" target="_blank" class="facebook-icon"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-      <li><a href="https://twitter.com/TechnoBeavers" target="_blank" class="twitter-icon"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-      <li><a href="https://www.linkedin.com/company/technobeavers" target="_blank" class="linked-icon"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+      <li><a href="#" target="_blank" class="facebook-icon"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+      <li><a href="#" target="_blank" class="twitter-icon"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+      <li><a href="#" target="_blank" class="linked-icon"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
     </ul>
   </div>
 </div>
@@ -47,7 +47,7 @@ const HOME_HTML = `
   <div class="container">
     <div class="row">
       <div class="col-md-6">
-        <a href=""><img src="assets/images/logo.png" alt="Technobeavers"></a>
+        <a href=""><img src="assets/images/logo-cpg.svg" alt="Crown Peak Global"></a>
       </div>
       <div class="col-md-6 text-right">
         <button id="myBtn" class="free-estimate mobhide">Request Info</button>
@@ -119,9 +119,9 @@ const HOME_HTML = `
 <section class="hm-section1 white-bg" data-midnight="yellow">
   <div class="container">
     <h2>ABOUT US</h2>
-    <p>Techno Beavers is emerging IT Company started in 2016. Years of experience has empowered our company and the team members to master technology and art of digital marketing. We have come up with the mission to offer integral and differentiated services that provide clients the possibility of increasing their business performance. Our workplaces are located in USA, UK, Australia, Pakistan are full of professional individuals who are devoted to help company prosper all over the world. We always strive to do better to improve your digital experiences.</p>
+    <p>Crown Peak Global is emerging IT Company started in 2016. Years of experience has empowered our company and the team members to master technology and art of digital marketing. We have come up with the mission to offer integral and differentiated services that provide clients the possibility of increasing their business performance. Our workplaces are located in USA, UK, Australia, Pakistan are full of professional individuals who are devoted to help company prosper all over the world. We always strive to do better to improve your digital experiences.</p>
     <h5>COMPANY PHILOSOPHY</h5>
-    <p><span>Our dedication and passion towards work drives us to perform well for Techno Beavers. We linked up with IT enthusiasts that are genuinely committed to take this company at the peak of success and development. Techno Beavers respect people's right and privacy and this leads us into certifying a win-win situation for company and people related to us.</span></p>
+    <p><span>Our dedication and passion towards work drives us to perform well for Crown Peak Global. We linked up with IT enthusiasts that are genuinely committed to take this company at the peak of success and development. Crown Peak Global respect people's right and privacy and this leads us into certifying a win-win situation for company and people related to us.</span></p>
     <img src="assets/images/Techno-Beavers-Cover.png" alt="">
   </div>
 </section>
@@ -132,12 +132,12 @@ const HOME_HTML = `
     <div class="row">
       <div class="col-md-3"><div>
         <div align="center"><img src="assets/images/graphic-designing-icon.png"><br><br><h3><span></span>Graphic Designing</h3><div></div></div>
-        <p>Techno Beaversoffers complete suite of digital services. Our graphic design team works best to give organizations an eye-catching brand that brings you ahead with your competitors.</p>
+        <p>Crown Peak Global offers complete suite of digital services. Our graphic design team works best to give organizations an eye-catching brand that brings you ahead with your competitors.</p>
         <a href="our-services/graphic-designing/">Read More</a><span class="count-num">01</span>
       </div></div>
       <div class="col-md-3"><div>
         <div align="center"><img src="assets/images/web-deve-icon.png"><br><br><h3><span></span> Web Development</h3></div>
-        <p>If you can think it, we can code it! Techno Beavers has a team of highly skilled and competent web designers and developer enabled us to be best in providing digital services. With the driven effort</p>
+        <p>If you can think it, we can code it! Crown Peak Global has a team of highly skilled and competent web designers and developer enabled us to be best in providing digital services. With the driven effort</p>
         <a href="our-services/web-development/">Read More</a><span class="count-num">02</span>
       </div></div>
       <div class="col-md-3"><div>
@@ -157,12 +157,12 @@ const HOME_HTML = `
       </div></div>
       <div class="col-md-3"><div>
         <div align="center"><img src="assets/images/seo-icon.png"><br><br><h3><span></span>SEO</h3></div>
-        <p>Techno Beavers in your reliable hub for all your SEO needs. Attaining better position amongst competitors is difficult without search engines. We perform genuine "white hat" optimization and link building.</p>
+        <p>Crown Peak Global in your reliable hub for all your SEO needs. Attaining better position amongst competitors is difficult without search engines. We perform genuine "white hat" optimization and link building.</p>
         <a href="our-services/search-engine-optimization/">Read More</a><span class="count-num">06</span>
       </div></div>
       <div class="col-md-3"><div>
         <div align="center"><img src="assets/images/video-icon.png"><br><br><h3><span></span>Video Animation</h3></div>
-        <p>Video Animation is something that helps you grab audience attention. Techno Beavers brings your dream into reality with outclass Video Animation services. Our video animators convert boring.</p>
+        <p>Video Animation is something that helps you grab audience attention. Crown Peak Global brings your dream into reality with outclass Video Animation services. Our video animators convert boring.</p>
         <a href="our-services/video-animation/">Read More</a><span class="count-num">07</span>
       </div></div>
       <div class="col-md-3"><div>
@@ -179,10 +179,10 @@ const HOME_HTML = `
     <div class="our-facts">
       <h2><span>Mobile App</span> Development</h2>
       <h2><span>Bringing innovative and top-tier mobile application solutions</span></h2>
-      <p><span>Techno Beavers is your ultimate gateway for remarkable mobile application development along with productive games and web development services. Whether you are looking for designing, development or creating wonderful applications for smartphones and tablets our company got you covered in everything.</span></p>
+      <p><span>Crown Peak Global is your ultimate gateway for remarkable mobile application development along with productive games and web development services. Whether you are looking for designing, development or creating wonderful applications for smartphones and tablets our company got you covered in everything.</span></p>
       <h3>The Best in the Mobile App Development Business</h3>
-      <p>People trust us in creating their next big things so be with us to create yours. With a gathered team of mobile strategists, designers and developersthat are dedicated in bringing clients ideas into reality.Techno Beavers has built strong reputation for affordable and dependable development services to fulfill your various business requirements.</p>
-      <p>Our Mobile app developers are proficient in producing high performing results that ensure maximum growth and lower project cost.Techno Beavers would be your sound partner when it comes to UX and UI Expertise. We strongly follow all the described do's and don'ts from Apple and Google to create designs that are easy to implement and use.</p>
+      <p>People trust us in creating their next big things so be with us to create yours. With a gathered team of mobile strategists, designers and developersthat are dedicated in bringing clients ideas into reality.Crown Peak Global has built strong reputation for affordable and dependable development services to fulfill your various business requirements.</p>
+      <p>Our Mobile app developers are proficient in producing high performing results that ensure maximum growth and lower project cost.Crown Peak Global would be your sound partner when it comes to UX and UI Expertise. We strongly follow all the described do's and don'ts from Apple and Google to create designs that are easy to implement and use.</p>
       <ul class="facts-list">
         <li><i class="fa fa-apple"></i><h6 class="mobh6">IOS</h6></li>
         <li><i class="fa fa-android"></i><h6 class="mobh6">Andriod</h6></li>
@@ -200,7 +200,7 @@ const HOME_HTML = `
   <div class="container">
     <span class="span-text portfolio"></span>
     <h2>Our Work</h2>
-    <p>Techno Beavers aims to give customers unique dynamic Web Development solution, SEO, Digital Marketing and much more. We stay true to our values and delivers best digital services to make it easy for development solutions. Our ground-breaking services are comprehensive and coherent that adds extra value in your business.</p>
+    <p>Crown Peak Global aims to give customers unique dynamic Web Development solution, SEO, Digital Marketing and much more. We stay true to our values and delivers best digital services to make it easy for development solutions. Our ground-breaking services are comprehensive and coherent that adds extra value in your business.</p>
     <div id="portfolio">
       <ul id="filters" class="clearfix">
         <li><span class="filter" data-filter="logos">Logos</span></li>
@@ -243,7 +243,7 @@ const HOME_HTML = `
   <div class="col-md-6">
     <div class="our-facts">
       <h2><span>We Love To Share </span> Our Facts.</h2>
-      <p><span>Within a short span of time Techno Beavers has gained the status of fastest growing IT Company in Pakistan. Our Company has undergone boom success in creating contemporary digital solutions for technology enthusiasts and businesses to help them make a prominent digital community. </span>Our office around the globe are fully equipped with hard working and passionate employees who are committed to perform their duties at best and to led us to attain the loyalty of customers. Our mission is to become a reputed IT company and stand beside in the top 10 IT Companies in Pakistan.<br></p>
+      <p><span>Within a short span of time Crown Peak Global has gained the status of fastest growing IT Company in Pakistan. Our Company has undergone boom success in creating contemporary digital solutions for technology enthusiasts and businesses to help them make a prominent digital community. </span>Our office around the globe are fully equipped with hard working and passionate employees who are committed to perform their duties at best and to led us to attain the loyalty of customers. Our mission is to become a reputed IT company and stand beside in the top 10 IT Companies in Pakistan.<br></p>
       <ul class="facts-list">
         <li><i class="icon-graph"></i><span>Started in</span><h6>2016</h6></li>
         <li><i class="icon-rocket"></i><span>Specialist Teams</span><h6>Four</h6></li>
@@ -258,11 +258,11 @@ const HOME_HTML = `
       <h5><i class="icon-smile"></i> Client reviews</h5>
       <p>When you have an idea, we make it practical and profitable for you! Our first preference is to make our customers satisfied. We emphasize in digitizing workflow, boosts communication and work to save time. Know what our valued customers say about us!</p>
       <div id="testimoanial-slider">
-        <div class="item"><div class="feeback-img"><img src="assets/images/testimonial-img1.png" alt=""></div><div class="feecback-content"><h6>Stephanie Kyle</h6><p>"I needed a cross platform app for my business and Techno Beavers team delivered just right, keeping each and every detail from minor to major and came up with something really excellent that I approved it right away"</p></div></div>
-        <div class="item"><div class="feeback-img"><img src="assets/images/testimonial-img2.png" alt=""></div><div class="feecback-content"><h6>John Williams</h6><p>Techno Beavers has comprehensive team of professionals who turned up with my entire projects in given deadline. They offer creative digital solutions with satisfactory customer service. It offers bang for your buck guys! I would love to recommend it!</p></div></div>
+        <div class="item"><div class="feeback-img"><img src="assets/images/testimonial-img1.png" alt=""></div><div class="feecback-content"><h6>Stephanie Kyle</h6><p>"I needed a cross platform app for my business and Crown Peak Global team delivered just right, keeping each and every detail from minor to major and came up with something really excellent that I approved it right away"</p></div></div>
+        <div class="item"><div class="feeback-img"><img src="assets/images/testimonial-img2.png" alt=""></div><div class="feecback-content"><h6>John Williams</h6><p>Crown Peak Global has comprehensive team of professionals who turned up with my entire projects in given deadline. They offer creative digital solutions with satisfactory customer service. It offers bang for your buck guys! I would love to recommend it!</p></div></div>
         <div class="item"><div class="feeback-img"><img src="assets/images/testimonial-img3.png" alt=""></div><div class="feecback-content"><h6>Kevin Ames</h6><p>I am so glad that you design my android app within a given time limit, highly satisfied by the efforts you guys put into the app development.</p></div></div>
         <div class="item"><div class="feeback-img"><img src="assets/images/testimonial-img4.png" alt=""></div><div class="feecback-content"><h6>Sara Scholes</h6><p>I'm much impressed with the fantastic experience given by your graphic designing team. My business has gained identity through a wonderful logo designed by you guys. Great Job!</p></div></div>
-        <div class="item"><div class="feeback-img"><img src="assets/images/testimonial-img5.png" alt=""></div><div class="feecback-content"><h6>Simon Hudson</h6><p>My experience was pretty satisfying as I approached them for SEO of my website and I was just amazed by the boost in my ranking, Techno Beavers team didn't disappoint you.</p></div></div>
+        <div class="item"><div class="feeback-img"><img src="assets/images/testimonial-img5.png" alt=""></div><div class="feecback-content"><h6>Simon Hudson</h6><p>My experience was pretty satisfying as I approached them for SEO of my website and I was just amazed by the boost in my ranking, Crown Peak Global team didn't disappoint you.</p></div></div>
       </div>
     </div>
   </div>
@@ -342,7 +342,7 @@ const HOME_HTML = `
     <div class="container">
       <i class="scroll-topft"></i>
       <div class="row">
-        <div class="col-md-4"><p>2020 Technobeavers. All rights reserved</p></div>
+        <div class="col-md-4"><p>© 2026 Crown Peak Global. All rights reserved</p></div>
         <div class="col-md-4"><h2>Digital Innovation</h2></div>
         <div class="col-md-4">
           <ul class="ftr-link">
@@ -394,6 +394,33 @@ export default function Home() {
             }
           }
           load(0);
+        })();
+      `}</Script>
+
+      {/* Both forms POST to /api/contact (Resend). Capture-phase listener runs
+          before the vendor jQuery handler and cancels its dead POST to *.php. */}
+      <Script id="tb-forms" strategy="afterInteractive">{`
+        (function () {
+          function attach(sel) {
+            var form = document.querySelector(sel);
+            if (!form) return;
+            form.addEventListener("submit", function (e) {
+              e.preventDefault();
+              e.stopImmediatePropagation();
+              var msg = form.querySelector(".form-messages");
+              function say(t, c) { if (msg) { msg.textContent = t; msg.style.color = c; msg.style.display = "block"; msg.style.marginTop = "10px"; } }
+              say("Sending...", "#0089d0");
+              fetch("/api/contact", { method: "POST", body: new FormData(form) })
+                .then(function (r) { return r.json().catch(function () { return { success: false }; }); })
+                .then(function (j) {
+                  if (j.success) { form.reset(); say("Thanks! We received your message and will get back to you.", "green"); }
+                  else { say(j.message || "Something went wrong. Please try again.", "red"); }
+                })
+                .catch(function () { say("Network error. Please try again.", "red"); });
+            }, true);
+          }
+          attach(".contactusform");
+          attach(".contactusform-footer");
         })();
       `}</Script>
     </>

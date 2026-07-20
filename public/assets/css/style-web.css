@@ -919,7 +919,7 @@ ul.ftr-form-field li textarea {
 }
 
 footer>.container:before {
-	background: url(../images/footer-logo.png) no-repeat left top;
+	background: url(../images/footer-logo.svg) no-repeat left top;
 	content: "";
 	position: absolute;
 	left: -60px;
@@ -4352,7 +4352,7 @@ ul.ftr-form-field li textarea {
 }
 
 footer>.container:before {
-	background: url(../images/footer-logo.png) no-repeat left top;
+	background: url(../images/footer-logo.svg) no-repeat left top;
 	content: "";
 	position: absolute;
 	left: -60px;
