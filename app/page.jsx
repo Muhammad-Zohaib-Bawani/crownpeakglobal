@@ -1,428 +1,266 @@
-import Script from "next/script";
-
-// Verbatim Crown Peak Global homepage markup. Rendered as raw HTML so the original
-// vendor CSS (served from /public) styles it 1:1. Analytics / FB-chat / inline
-// <script> tags were stripped — JS is loaded in order by the loader below.
-// ponytail: clone, not a rewrite — hand-porting 500 lines to JSX buys nothing.
-const HOME_HTML = `
-<div class="menu-bar navbr animate fadeInLeft animated" data-animation="fadeInLeft" data-duration="1200">
-  <div id="nav-icon3" class="menu-open animate fadeInLeft animated" data-animation="fadeInLeft" data-duration="1500">
-    <span></span><span></span><span></span><span></span>
-  </div>
-  <div class="mobile-menu">
-    <a href="javascript:" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#search" class="search-icon animate fadeInLeft animated" data-animation="fadeInLeft" data-duration="1500">
-      <i class="fa fa-search" aria-hidden="true"></i>
-    </a>
-    <nav class="sub-nav">
-      <ul>
-        <li class="fadeUp1 active"><a href="" data-letters="Home" class="link link--kukuri">Home</a></li>
-        <li class="fadeUp2"><a href="who-we-are/">Who We Are</a></li>
-        <li class="fadeUp3"><a href="our-services/">Our Services</a>
-          <i class="small-arrow"><svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#small-arrow"></use></svg></i>
-          <ul class="first-menu">
-            <li><a href="our-services/graphic-designing/">Graphic Designing</a></li>
-            <li><a href="our-services/web-development/">Web Design &amp; Development</a></li>
-            <li><a href="our-services/app-development/">App Development</a></li>
-            <li><a href="our-services/video-animation/">Video Animation</a></li>
-            <li><a href="our-services/social-media-management/">Social Media Management</a></li>
-            <li><a href="our-services/content-management/">Content Management</a></li>
-            <li><a href="our-services/search-engine-optimization/">Search Engine Optimization</a></li>
-            <li><a href="our-services/digital-marketing/"> Digital Marketing</a></li>
-          </ul>
-        </li>
-        <li class="fadeUp5"><a href="portfolio/">Portfolio</a></li>
-        <li class="fadeUp6"><a href="careers/">Careers</a></li>
-        <li class="fadeUp6"><a href="contact-us/">Contact Us</a></li>
-      </ul>
-    </nav>
-    <ul class="header-icons animate fadeInLeft animated" data-animation="fadeInLeft" data-duration="1500">
-      <li><a href="#" target="_blank" class="facebook-icon"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-      <li><a href="#" target="_blank" class="twitter-icon"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-      <li><a href="#" target="_blank" class="linked-icon"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-    </ul>
-  </div>
-</div>
-
-<header>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <a href=""><img src="assets/images/logo-cpg.svg" alt="Crown Peak Global"></a>
-      </div>
-      <div class="col-md-6 text-right">
-        <button id="myBtn" class="free-estimate mobhide">Request Info</button>
-        <div id="myModal" class="modal">
-          <div class="text-left">
-            <span class="close">&times;</span>
-            <section class="contact-form-col">
-              <div class="container">
-                <h2>Fill out the form below <br>and we will get back to you.</h2>
-                <p>Feel free to contact us at any time with your projects, questions and feedback. We love hearing from you and we love solving problems. Even when you are not sure about it, we encourage that you give us a nudge and we'll see how we can help.</p>
-                <div class="contact-form">
-                  <form class="contactusform" action="sending.php" method="post">
-                    <ul>
-                      <li><input type="text" name="fname" id="fname" placeholder="Your Name" required class="required"></li>
-                      <li><input type="text" name="represent" id="represent" required class="required" placeholder="What company, organisation, or cause do you represent?"></li>
-                      <li><input type="email" name="em" id="em" required class="required" placeholder="Your Email Address"></li>
-                      <li><input type="text" name="pn" id="pn" required class="required" placeholder="Your Phone Number"></li>
-                      <li><select name="hlp" id="hlp" required class="required">
-                        <option value="How can we help?" disabled>How can we help?</option>
-                        <option>Web Development</option>
-                        <option>Web Designing</option>
-                        <option>SEO</option>
-                        <option>Web Optimization</option>
-                        <option>Video Animation</option>
-                        <option>Other</option>
-                      </select></li>
-                      <li><select name="financial" id="financial" required class="required">
-                        <option value="Type">Type</option>
-                        <option value="Company">Company</option>
-                        <option value="Indivisual">Individual</option>
-                      </select></li>
-                      <li><input type="text" name="startproject" required class="required" id="startproject" placeholder="When would you like to start this project?" onfocus="(this.type='date')"></li>
-                      <li><select name="hearaboutus" id="hearaboutus" required class="required">
-                        <option value="How did you hear about us?">How did you hear about us?</option>
-                        <option value="Social Media">Social Media</option>
-                        <option value="Online Forum">Online Forum</option>
-                        <option value="Online Ads">Online Ads</option>
-                        <option value="Print Media">Print Media</option>
-                        <option value="Friend or Colleague">Friend or Colleague</option>
-                        <option value="Website">Website</option>
-                        <option value="Others">Others</option>
-                      </select></li>
-                      <div class="form-messages"></div>
-                      <li><input type="submit" name="submit" id="submit"></li>
-                    </ul>
-                  </form>
-                </div>
-              </div>
-            </section>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
-
-<section class="banner white-bg" data-midnight="red">
-  <video poster=" " id="bgvid" playsinline="" autoplay="" muted="" loop=""></video>
-  <div class="banner-home banner-animate-bg"></div>
-  <div class="container">
-    <p>Digital Solutions for Business Growth</p>
-    <h1 class="heading">We Help You</h1> <br>
-    <h2 class="heading" id="example4" style="color: #0089d0; margin-top: -20px;"></h2>
-  </div>
-  <a href="#" class="scroll-down"></a>
-</section>
-<a name="downz"></a>
-
-<section class="hm-section1 white-bg" data-midnight="yellow">
-  <div class="container">
-    <h2>ABOUT US</h2>
-    <p>Crown Peak Global is emerging IT Company started in 2016. Years of experience has empowered our company and the team members to master technology and art of digital marketing. We have come up with the mission to offer integral and differentiated services that provide clients the possibility of increasing their business performance. Our workplaces are located in USA, UK, Australia, Pakistan are full of professional individuals who are devoted to help company prosper all over the world. We always strive to do better to improve your digital experiences.</p>
-    <h5>COMPANY PHILOSOPHY</h5>
-    <p><span>Our dedication and passion towards work drives us to perform well for Crown Peak Global. We linked up with IT enthusiasts that are genuinely committed to take this company at the peak of success and development. Crown Peak Global respect people's right and privacy and this leads us into certifying a win-win situation for company and people related to us.</span></p>
-    <img src="assets/images/Techno-Beavers-Cover.png" alt="">
-  </div>
-</section>
-
-<section class="what-we-do-section black-bg" data-midnight="red">
-  <div class="container">
-    <h2><span>What</span> We Do</h2>
-    <div class="row">
-      <div class="col-md-3"><div>
-        <div align="center"><img src="assets/images/graphic-designing-icon.png"><br><br><h3><span></span>Graphic Designing</h3><div></div></div>
-        <p>Crown Peak Global offers complete suite of digital services. Our graphic design team works best to give organizations an eye-catching brand that brings you ahead with your competitors.</p>
-        <a href="our-services/graphic-designing/">Read More</a><span class="count-num">01</span>
-      </div></div>
-      <div class="col-md-3"><div>
-        <div align="center"><img src="assets/images/web-deve-icon.png"><br><br><h3><span></span> Web Development</h3></div>
-        <p>If you can think it, we can code it! Crown Peak Global has a team of highly skilled and competent web designers and developer enabled us to be best in providing digital services. With the driven effort</p>
-        <a href="our-services/web-development/">Read More</a><span class="count-num">02</span>
-      </div></div>
-      <div class="col-md-3"><div>
-        <div align="center"><img src="assets/images/mobile-app-icon.png"><br><br><h3><span></span>App Development</h3></div>
-        <p>Are you into to use mobile technology for your business than with the best programming practices, effective coding, structured development methods along with well compiled standards make us just</p>
-        <a href="our-services/app-development/">Read More</a><span class="count-num">03</span>
-      </div></div>
-      <div class="col-md-3"><div>
-        <div align="center"><img src="assets/images/social-media-management-icon.png"><br><br><h3><span></span>Social Management</h3></div>
-        <p>Social Media Marketing helps you to accelerate marketing of your business. We build and manage high-performing social media campaigns for businesses, manage social media networks and deliverrelevant.</p>
-        <a href="our-services/social-media-management/">Read More</a><span class="count-num">04</span>
-      </div></div>
-      <div class="col-md-3"><div>
-        <div align="center"><img src="assets/images/content-icon.png"><br><br><h3><span></span>Content Management</h3></div>
-        <p>We have proficient individuals in our Content Management department that generates unique, genuine and informatory content for your business. Our writers help you to achieve great success .</p>
-        <a href="our-services/content-management/">Read More</a><span class="count-num">05</span>
-      </div></div>
-      <div class="col-md-3"><div>
-        <div align="center"><img src="assets/images/seo-icon.png"><br><br><h3><span></span>SEO</h3></div>
-        <p>Crown Peak Global in your reliable hub for all your SEO needs. Attaining better position amongst competitors is difficult without search engines. We perform genuine "white hat" optimization and link building.</p>
-        <a href="our-services/search-engine-optimization/">Read More</a><span class="count-num">06</span>
-      </div></div>
-      <div class="col-md-3"><div>
-        <div align="center"><img src="assets/images/video-icon.png"><br><br><h3><span></span>Video Animation</h3></div>
-        <p>Video Animation is something that helps you grab audience attention. Crown Peak Global brings your dream into reality with outclass Video Animation services. Our video animators convert boring.</p>
-        <a href="our-services/video-animation/">Read More</a><span class="count-num">07</span>
-      </div></div>
-      <div class="col-md-3"><div>
-        <div align="center"><img src="assets/images/digital-icon.png"><br><br><h3><span></span>Digital Marketing</h3></div>
-        <p>Digital Marketing is important to building and maintaining a successful business. Our Marketers keep updated with the changing trends in the tech world and with the effective approach to.</p>
-        <a href="our-services/digital-marketing/">Read More</a><span class="count-num">08</span>
-      </div></div>
-    </div>
-  </div>
-</section>
-
-<section class="facts-and-client">
-  <div class="col-md-6">
-    <div class="our-facts">
-      <h2><span>Mobile App</span> Development</h2>
-      <h2><span>Bringing innovative and top-tier mobile application solutions</span></h2>
-      <p><span>Crown Peak Global is your ultimate gateway for remarkable mobile application development along with productive games and web development services. Whether you are looking for designing, development or creating wonderful applications for smartphones and tablets our company got you covered in everything.</span></p>
-      <h3>The Best in the Mobile App Development Business</h3>
-      <p>People trust us in creating their next big things so be with us to create yours. With a gathered team of mobile strategists, designers and developersthat are dedicated in bringing clients ideas into reality.Crown Peak Global has built strong reputation for affordable and dependable development services to fulfill your various business requirements.</p>
-      <p>Our Mobile app developers are proficient in producing high performing results that ensure maximum growth and lower project cost.Crown Peak Global would be your sound partner when it comes to UX and UI Expertise. We strongly follow all the described do's and don'ts from Apple and Google to create designs that are easy to implement and use.</p>
-      <ul class="facts-list">
-        <li><i class="fa fa-apple"></i><h6 class="mobh6">IOS</h6></li>
-        <li><i class="fa fa-android"></i><h6 class="mobh6">Andriod</h6></li>
-        <li><i class="fa fa-windows"></i><h6 class="mobh6">Windows</h6></li>
-        <li><i class="fa fa-gamepad"></i><h6 class="mobh6">Games</h6></li>
-      </ul>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="client-feedback"><img src="assets/images/andriod-app-2.png" alt=""></div>
-  </div>
-</section>
-
-<section class="portfolio">
-  <div class="container">
-    <span class="span-text portfolio"></span>
-    <h2>Our Work</h2>
-    <p>Crown Peak Global aims to give customers unique dynamic Web Development solution, SEO, Digital Marketing and much more. We stay true to our values and delivers best digital services to make it easy for development solutions. Our ground-breaking services are comprehensive and coherent that adds extra value in your business.</p>
-    <div id="portfolio">
-      <ul id="filters" class="clearfix">
-        <li><span class="filter" data-filter="logos">Logos</span></li>
-        <li><span class="filter" data-filter="apps">Mobile Apps</span></li>
-        <li><span class="filter" data-filter="websites">Websites</span></li>
-      </ul>
-      <div id="portfoliolist">
-        <div class="col-md-4 logos mix_all" data-cat="logos" style="display: inline-block; opacity: 1;"><img src="assets/images/logo1.png" alt=""><div class="leadership-overlay"></div></div>
-        <div class="col-md-4 logos mix_all" data-cat="logos" style="display: inline-block; opacity: 1;"><img src="assets/images/logo2.png" alt=""><div class="leadership-overlay"></div></div>
-        <div class="col-md-4 logos mix_all" data-cat="logos" style="display: inline-block; opacity: 1;"><img src="assets/images/logo3.png" alt=""><div class="leadership-overlay"></div></div>
-        <div class="col-md-4 logos mix_all" data-cat="logos" style="display: inline-block; opacity: 1;"><img src="assets/images/logo9.png" alt=""><div class="leadership-overlay"></div></div>
-        <div class="col-md-4 logos mix_all" data-cat="logos" style="display: inline-block; opacity: 1;"><img src="assets/images/logo5.png" alt=""><div class="leadership-overlay"></div></div>
-        <div class="col-md-4 logos mix_all" data-cat="logos" style="display: inline-block; opacity: 1;"><img src="assets/images/logo6.png" alt=""><div class="leadership-overlay"></div></div>
-        <div class="col-md-4 logos mix_all" data-cat="logos" style="display: inline-block; opacity: 1;"><img src="assets/images/logo4.png" alt=""><div class="leadership-overlay"></div></div>
-        <div class="col-md-4 logos mix_all" data-cat="logos" style="display: inline-block; opacity: 1;"><img src="assets/images/logo7.png" alt=""><div class="leadership-overlay"></div></div>
-        <div class="col-md-4 logos mix_all" data-cat="logos" style="display: inline-block; opacity: 1;"><img src="assets/images/logo8.png" alt=""><div class="leadership-overlay"></div></div>
-        <div class="col-md-4 websites mix_all" data-cat="websites"><img src="assets/images/mockup-1.png" alt=""><div class="leadership-overlay"></div></div>
-        <div class="col-md-4 websites mix_all" data-cat="websites"><img src="assets/images/mockup-2.png" alt=""><div class="leadership-overlay"></div></div>
-        <div class="col-md-4 websites mix_all" data-cat="websites"><img src="assets/images/mockup-3.png" alt=""><div class="leadership-overlay"></div></div>
-        <div class="col-md-4 websites mix_all" data-cat="websites"><img src="assets/images/mockup-4.png" alt=""><div class="leadership-overlay"></div></div>
-        <div class="col-md-4 websites mix_all" data-cat="websites"><img src="assets/images/mockup-5.png" alt=""><div class="leadership-overlay"></div></div>
-        <div class="col-md-4 websites mix_all" data-cat="websites"><img src="assets/images/mockup-6.png" alt=""><div class="leadership-overlay"></div></div>
-        <div class="col-md-4 websites mix_all" data-cat="websites"><img src="assets/images/mockup-7.png" alt=""><div class="leadership-overlay"></div></div>
-        <div class="col-md-4 websites mix_all" data-cat="websites"><img src="assets/images/mockup-8.png" alt=""><div class="leadership-overlay"></div></div>
-        <div class="col-md-4 websites mix_all" data-cat="websites"><img src="assets/images/mockup-9.png" alt=""><div class="leadership-overlay"></div></div>
-        <div class="col-md-4 apps mix_all" data-cat="apps"><img src="assets/images/mob-1.png" alt=""><div class="leadership-overlay"></div></div>
-        <div class="col-md-4 apps mix_all" data-cat="apps"><img src="assets/images/mob-2.png" alt=""><div class="leadership-overlay"></div></div>
-        <div class="col-md-4 apps mix_all" data-cat="apps"><img src="assets/images/mob-3.png" alt=""><div class="leadership-overlay"></div></div>
-        <div class="col-md-4 apps mix_all" data-cat="apps"><img src="assets/images/mob-4.png" alt=""><div class="leadership-overlay"></div></div>
-        <div class="col-md-4 apps mix_all" data-cat="apps"><img src="assets/images/mob-5.png" alt=""><div class="leadership-overlay"></div></div>
-        <div class="col-md-4 apps mix_all" data-cat="apps"><img src="assets/images/mob-6.jpg" alt=""><div class="leadership-overlay"></div></div>
-      </div>
-      <div class="clearfix"></div>
-      <a href="#" class="btn-orange">View More</a>
-    </div>
-  </div>
-</section>
-
-<section class="facts-and-client">
-  <div class="col-md-6">
-    <div class="our-facts">
-      <h2><span>We Love To Share </span> Our Facts.</h2>
-      <p><span>Within a short span of time Crown Peak Global has gained the status of fastest growing IT Company in Pakistan. Our Company has undergone boom success in creating contemporary digital solutions for technology enthusiasts and businesses to help them make a prominent digital community. </span>Our office around the globe are fully equipped with hard working and passionate employees who are committed to perform their duties at best and to led us to attain the loyalty of customers. Our mission is to become a reputed IT company and stand beside in the top 10 IT Companies in Pakistan.<br></p>
-      <ul class="facts-list">
-        <li><i class="icon-graph"></i><span>Started in</span><h6>2016</h6></li>
-        <li><i class="icon-rocket"></i><span>Specialist Teams</span><h6>Four</h6></li>
-        <li><i class="icon-smile"></i><span>Happy Clients</span><h6>400+</h6></li>
-        <li><i class="icon-thumb"></i><span>Offices Worldwide</span><h6>5+</h6></li>
-      </ul>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="client-feedback">
-      <h2><span>Clients</span> about us.</h2>
-      <h5><i class="icon-smile"></i> Client reviews</h5>
-      <p>When you have an idea, we make it practical and profitable for you! Our first preference is to make our customers satisfied. We emphasize in digitizing workflow, boosts communication and work to save time. Know what our valued customers say about us!</p>
-      <div id="testimoanial-slider">
-        <div class="item"><div class="feeback-img"><img src="assets/images/testimonial-img1.png" alt=""></div><div class="feecback-content"><h6>Stephanie Kyle</h6><p>"I needed a cross platform app for my business and Crown Peak Global team delivered just right, keeping each and every detail from minor to major and came up with something really excellent that I approved it right away"</p></div></div>
-        <div class="item"><div class="feeback-img"><img src="assets/images/testimonial-img2.png" alt=""></div><div class="feecback-content"><h6>John Williams</h6><p>Crown Peak Global has comprehensive team of professionals who turned up with my entire projects in given deadline. They offer creative digital solutions with satisfactory customer service. It offers bang for your buck guys! I would love to recommend it!</p></div></div>
-        <div class="item"><div class="feeback-img"><img src="assets/images/testimonial-img3.png" alt=""></div><div class="feecback-content"><h6>Kevin Ames</h6><p>I am so glad that you design my android app within a given time limit, highly satisfied by the efforts you guys put into the app development.</p></div></div>
-        <div class="item"><div class="feeback-img"><img src="assets/images/testimonial-img4.png" alt=""></div><div class="feecback-content"><h6>Sara Scholes</h6><p>I'm much impressed with the fantastic experience given by your graphic designing team. My business has gained identity through a wonderful logo designed by you guys. Great Job!</p></div></div>
-        <div class="item"><div class="feeback-img"><img src="assets/images/testimonial-img5.png" alt=""></div><div class="feecback-content"><h6>Simon Hudson</h6><p>My experience was pretty satisfying as I approached them for SEO of my website and I was just amazed by the boost in my ranking, Crown Peak Global team didn't disappoint you.</p></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="container">
-    <div class="row">
-      <div class="span12">
-        <div id="owl-example" class="owl-carousel">
-          <div style="text-align: center;"><img src="assets/img/demo-slides/touch.png" alt="PHP"></div>
-          <div style="text-align: center;"><img src="assets/img/demo-slides/grab.png" alt="bootstrap"></div>
-          <div style="text-align: center;"><img src="assets/img/demo-slides/responsive.png" alt="googleanalytic"></div>
-          <div style="text-align: center;"><img src="assets/img/demo-slides/adobe.png" alt="adobe"></div>
-          <div style="text-align: center;"><img src="assets/img/demo-slides/css3.png" alt="googlewebmaster"></div>
-          <div style="text-align: center;"><img src="assets/img/demo-slides/client6.png" alt="jquery"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="container">
-    <div class="footer-sec-1 row">
-      <div class="col-md-6">
-        <div class="footer-form">
-          <h3>Work With Us</h3>
-          <ul class="ftr-form-field">
-            <form class="contactusform-footer" action="footsend.php" method="post">
-              <li><input type="text" id="fname" name="fname" placeholder="Full Name*" class="required" required="" /></li>
-              <li><input type="email" id="em" name="em" placeholder="Email Address*" class="required email" required="" /></li>
-              <li><input type="tel" id="pn" name="pn" placeholder="Phone No*" class="required phone" required="" /></li>
-              <li><input type="text" id="interest" name="interest" placeholder="Interest*" class="required" required="" /></li>
-              <li><textarea name="help" id="help" placeholder="How we can help you?"></textarea></li>
-              <li><input type="submit" class="btn-orange" name="submit" id="submit"></li>
-              <div class="form-messages"></div>
-            </form>
-          </ul>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <h4>Our Services</h4>
-        <ul class="ftr-list">
-          <li><a href="our-services/graphic-designing/">- Graphic Designing</a></li>
-          <li><a href="our-services/web-development/">- Web Design &amp; Development</a></li>
-          <li><a href="our-services/app-development/">- App Development</a></li>
-          <li><a href="our-services/video-animation/">- Video Animation</a></li>
-          <li><a href="our-services/social-media-management/">- Social Media Management</a></li>
-          <li><a href="our-services/content-management/">- Content Management</a></li>
-          <li><a href="our-services/search-engine-optimization/">- Search Engine Optimization</a></li>
-          <li><a href="our-services/digital-marketing/">- Digital Marketing</a></li>
-        </ul>
-      </div>
-      <div class="col-md-3">
-        <h4>Quick Links</h4>
-        <ul class="ftr-list">
-          <li><a href="who-we-are/">- Who We Are</a></li>
-          <li><a href="our-services/">- Our Services</a></li>
-          <li><a href="careers/">- Careers</a></li>
-          <li><a href="portfolio/">- Portfolio</a></li>
-          <li><a href="contact-us/">- Contact Us</a></li>
-          <li><a href="privacy-policy/">- Privacy Policy</a></li>
-          <li><a href="terms-of-use/">- Terms Of Use</a></li>
-          <li><a href="refund-policy/">- Refund Policy</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-sec-2 row">
-      <div class="col-md-3"><h4>Pakistan</h4><p>Suite #08, Plot E-4, Mezzanine Floor, Maqbool Heights, NIPA Chowrangi، Block 10<br>Gulshan-e-Iqbal, Karachi.<br><b>+92 330 3739090</b></p></div>
-      <div class="col-md-3"><h4>UK</h4><p>134 Newbridge Rd Birmingham B9 5JQ, United Kingdom<br><b>+44 7724 589422</b></p></div>
-      <div class="col-md-3"><h4>Canada</h4><p>1967 Lawrence Avenue Unit #3 M1R-2Z2 Toronto Ontario, Canada<br>TX 75201<br></p></div>
-      <div class="col-md-3"><h4>Australia</h4><p>813-815 Ballarat Road , Deer Park Melbourne Victoria 3021,<br>Australia</p></div>
-    </div>
-  </div>
-  <div class="copyright">
-    <div class="container">
-      <i class="scroll-topft"></i>
-      <div class="row">
-        <div class="col-md-4"><p>© 2026 Crown Peak Global. All rights reserved</p></div>
-        <div class="col-md-4"><h2>Digital Innovation</h2></div>
-        <div class="col-md-4">
-          <ul class="ftr-link">
-            <li><img src="assets/images/dmca.png" width="61" height="32"></li>
-            <li><img src="assets/images/bing.png" width="49" height="32"></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<div class="mobile-cta">
-  <a href="tel:+923303739090" class="xicon call"><i class="fa fa-phone"></i></a>
-  <a style="font-size:25px; padding-top: 2px;" href="https://wa.me/+923303739090" class="xicon call"><i class="fa fa-whatsapp"></i></a>
-</div>
-`;
+import Link from "next/link";
+import CapabilityTabs from "@/components/CapabilityTabs";
+import CtaBlock from "@/components/CtaBlock";
+import Faq from "@/components/Faq";
+import Icon from "@/components/Icon";
+import Marquee from "@/components/Marquee";
+import Reveal from "@/components/Reveal";
+import SectionHead from "@/components/SectionHead";
+import Testimonials from "@/components/Testimonials";
+import WorkGallery from "@/components/WorkGallery";
+import { faqs, industries, process, services, site, stats, work } from "@/lib/site";
 
 export default function Home() {
   return (
     <>
-      <div id="tb-root" dangerouslySetInnerHTML={{ __html: HOME_HTML }} />
+      {/* ── Hero ─────────────────────────────────────────────── */}
+      <section className="grid-bg relative overflow-hidden pb-20 pt-16 sm:pt-24">
+        <div className="glow -top-48 left-1/2 h-[420px] w-[820px] -translate-x-1/2" aria-hidden="true" />
 
-      {/* Load the original scripts in dependency order (jQuery bundle first),
-          then run the owl-carousel init that was inline in the source page. */}
-      <Script id="tb-loader" strategy="afterInteractive">{`
-        (function () {
-          var scripts = [
-            "/assets/js/lib.js",
-            "/assets/js/functions.js",
-            "/dist/typeit.min.js",
-            "/assets/js/scriptbanner.js",
-            "/owl-carousel/owl.carousel.min.js"
-          ];
-          function load(i) {
-            if (i >= scripts.length) return init();
-            var s = document.createElement("script");
-            s.src = scripts[i];
-            s.onload = function () { load(i + 1); };
-            s.onerror = function () { load(i + 1); };
-            document.body.appendChild(s);
-          }
-          function init() {
-            if (window.jQuery) {
-              var owl = window.jQuery(".owl-carousel");
-              if (owl.owlCarousel) {
-                owl.owlCarousel({ items: 4, loop: true, margin: 10, autoPlay: true, autoplayTimeout: 300 });
-              }
-            }
-          }
-          load(0);
-        })();
-      `}</Script>
+        <div className="shell relative text-center">
+          <Reveal>
+            <span className="mx-auto inline-flex items-center gap-2 rounded-full border border-hairline bg-surface px-4 py-2 text-[13px] font-semibold text-white/75">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+              {site.tagline}
+            </span>
+          </Reveal>
 
-      {/* Both forms POST to /api/contact (Resend). Capture-phase listener runs
-          before the vendor jQuery handler and cancels its dead POST to *.php. */}
-      <Script id="tb-forms" strategy="afterInteractive">{`
-        (function () {
-          function attach(sel) {
-            var form = document.querySelector(sel);
-            if (!form) return;
-            form.addEventListener("submit", function (e) {
-              e.preventDefault();
-              e.stopImmediatePropagation();
-              var msg = form.querySelector(".form-messages");
-              function say(t, c) { if (msg) { msg.textContent = t; msg.style.color = c; msg.style.display = "block"; msg.style.marginTop = "10px"; } }
-              say("Sending...", "#0089d0");
-              fetch("/api/contact", { method: "POST", body: new FormData(form) })
-                .then(function (r) { return r.json().catch(function () { return { success: false }; }); })
-                .then(function (j) {
-                  if (j.success) { form.reset(); say("Thanks! We received your message and will get back to you.", "green"); }
-                  else { say(j.message || "Something went wrong. Please try again.", "red"); }
-                })
-                .catch(function () { say("Network error. Please try again.", "red"); });
-            }, true);
-          }
-          attach(".contactusform");
-          attach(".contactusform-footer");
-        })();
-      `}</Script>
+          <Reveal delay={0.08}>
+            <h1 className="mx-auto mt-7 max-w-4xl text-[38px] font-bold leading-[1.04] sm:text-6xl md:text-[70px]">
+              We build the brand, the product and the <span className="text-accent">growth engine</span>.
+            </h1>
+          </Reveal>
+
+          <Reveal delay={0.16}>
+            <p className="mx-auto mt-6 max-w-2xl text-[17px] leading-relaxed text-muted sm:text-lg">
+              Crown Peak Global is one team for design, development and marketing. No handoffs between three agencies,
+              no chasing four people for a status — one roadmap, one point of contact, work you can see every week.
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.24}>
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-3.5">
+              <Link href="/contact" className="btn btn-primary">
+                Start a project
+                <Icon name="arrow" size={16} strokeWidth={2} />
+              </Link>
+              <Link href="/work" className="btn btn-ghost">
+                See our work
+              </Link>
+            </div>
+          </Reveal>
+
+          {/* Showcase panel in browser chrome — real project mockups, no stock. */}
+          <Reveal delay={0.32}>
+            <div className="relative mx-auto mt-16 max-w-5xl overflow-hidden rounded-[22px] border border-hairline bg-surface p-2.5 shadow-2xl shadow-black/60">
+              <div className="flex items-center gap-2 px-3 pb-2.5 pt-1">
+                <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+                <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+                <span className="h-2.5 w-2.5 rounded-full bg-accent/70" />
+              </div>
+              <div className="grid grid-cols-2 gap-2.5 rounded-2xl bg-ink-2 p-2.5 sm:grid-cols-4">
+                {[work.websites[0], work.websites[1], work.apps[0], work.brands[0]].map((src) => (
+                  <div key={src} className="aspect-[4/3] overflow-hidden rounded-xl border border-hairline bg-ink">
+                    <img src={src} alt="" aria-hidden="true" className="h-full w-full object-contain p-3" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── Trust rail ───────────────────────────────────────── */}
+      <section className="border-y border-hairline bg-ink-2 py-12">
+        <p className="text-center text-[13px] font-bold uppercase tracking-[0.2em] text-muted">
+          Brands we have built for
+        </p>
+        <Marquee items={work.brands} className="mt-9" />
+      </section>
+
+      {/* ── Stats ────────────────────────────────────────────── */}
+      <section className="shell grid grid-cols-2 gap-px overflow-hidden rounded-[20px] border border-hairline bg-hairline md:grid-cols-4 lg:mt-24">
+        {stats.map((s, i) => (
+          <Reveal key={s.label} delay={i * 0.06} className="bg-ink px-6 py-9 text-center">
+            <div className="text-4xl font-bold text-accent sm:text-[42px]">{s.value}</div>
+            <div className="mt-2 text-[13px] font-semibold uppercase tracking-[0.14em] text-muted">{s.label}</div>
+          </Reveal>
+        ))}
+      </section>
+
+      {/* ── Capabilities ─────────────────────────────────────── */}
+      <section className="py-24">
+        <div className="shell">
+          <SectionHead
+            eyebrow="What we cover"
+            title="Every layer of your digital presence, under one roof"
+            sub="Pick the tab that matches the problem you have today. Most clients start with one and grow into the rest."
+          />
+          <CapabilityTabs />
+        </div>
+      </section>
+
+      {/* ── Services grid ────────────────────────────────────── */}
+      <section className="border-y border-hairline bg-ink-2 py-24">
+        <div className="shell">
+          <SectionHead
+            eyebrow="Our services"
+            title="Eight service lines, one delivery team"
+            sub="Each one runs to the same standard: a scoped plan, weekly visible progress and full handover at the end."
+          />
+
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {services.map((s, i) => (
+              <Reveal key={s.slug} delay={Math.min(i * 0.05, 0.3)}>
+                <Link href={`/services/${s.slug}`} className="card group flex h-full flex-col p-7">
+                  <span className="grid h-12 w-12 place-items-center rounded-xl border border-hairline bg-ink text-accent transition group-hover:border-accent/50">
+                    <Icon name={s.icon} size={22} />
+                  </span>
+                  <h3 className="mt-6 text-[19px] font-bold">{s.title}</h3>
+                  <p className="mt-3 flex-1 text-[14.5px] leading-relaxed text-muted">{s.short}</p>
+                  <span className="mt-6 inline-flex items-center gap-2 text-[13px] font-bold uppercase tracking-[0.12em] text-accent">
+                    Read more
+                    <Icon name="arrow" size={15} strokeWidth={2} className="transition group-hover:translate-x-1" />
+                  </span>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Feature split: mobile ────────────────────────────── */}
+      <section className="py-24">
+        <div className="shell grid gap-14 lg:grid-cols-2 lg:items-center">
+          <div>
+            <Reveal>
+              <span className="eyebrow">Mobile</span>
+            </Reveal>
+            <Reveal delay={0.06}>
+              <h2 className="mt-5 text-3xl font-bold sm:text-4xl md:text-[42px]">
+                Apps scoped to ship, not to impress a slide
+              </h2>
+            </Reveal>
+            <Reveal delay={0.12}>
+              <p className="mt-5 text-[16.5px] leading-relaxed text-muted">
+                Strategists, designers and developers sit in one team, so the thing that gets designed is the thing that
+                gets built. We put a real build in your hands early and iterate on what users actually do.
+              </p>
+            </Reveal>
+            <Reveal delay={0.16}>
+              <p className="mt-4 text-[16.5px] leading-relaxed text-muted">
+                Apple and Google review requirements, offline behaviour, auth and payments are planned up front — the
+                parts that usually push a launch by a month.
+              </p>
+            </Reveal>
+
+            <ul className="mt-9 grid grid-cols-2 gap-4 sm:grid-cols-4">
+              {["iOS", "Android", "Cross-platform", "Games"].map((p, i) => (
+                <Reveal key={p} delay={0.2 + i * 0.05}>
+                  <li className="rounded-xl border border-hairline bg-surface px-4 py-4 text-center text-sm font-bold">
+                    {p}
+                  </li>
+                </Reveal>
+              ))}
+            </ul>
+
+            <Reveal delay={0.4}>
+              <Link href="/services/app-development" className="btn btn-ghost mt-9">
+                App development
+                <Icon name="arrow" size={16} strokeWidth={2} />
+              </Link>
+            </Reveal>
+          </div>
+
+          <Reveal delay={0.1} className="relative">
+            <div className="glow -right-10 top-10 h-[280px] w-[280px]" aria-hidden="true" />
+            <img
+              src="/assets/images/andriod-app-2.png"
+              alt="Mobile app screens designed and built by Crown Peak Global"
+              className="relative mx-auto w-full max-w-lg"
+            />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── Process ──────────────────────────────────────────── */}
+      <section className="border-y border-hairline bg-ink-2 py-24">
+        <div className="shell">
+          <SectionHead
+            eyebrow="How we work"
+            title="Five steps, no black box"
+            sub="You always know what stage we are at, what is next and who is doing it."
+          />
+
+          <ol className="mt-12 grid gap-5 md:grid-cols-3 lg:grid-cols-5">
+            {process.map((p, i) => (
+              <Reveal key={p.step} delay={Math.min(i * 0.06, 0.3)}>
+                <li className="card h-full p-7">
+                  <span className="font-mono text-sm font-bold text-accent">{p.step}</span>
+                  <h3 className="mt-4 text-[19px] font-bold">{p.title}</h3>
+                  <p className="mt-3 text-[14.5px] leading-relaxed text-muted">{p.copy}</p>
+                </li>
+              </Reveal>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* ── Work ─────────────────────────────────────────────── */}
+      <section className="py-24">
+        <div className="shell">
+          <SectionHead
+            eyebrow="Selected work"
+            title="Brands, sites and apps we have shipped"
+            sub="A slice of the portfolio — filter by what you are looking for."
+          />
+          <WorkGallery limit={6} />
+          <div className="mt-10 text-center">
+            <Link href="/work" className="btn btn-ghost">
+              View the full portfolio
+              <Icon name="arrow" size={16} strokeWidth={2} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Industries ───────────────────────────────────────── */}
+      <section className="border-y border-hairline bg-ink-2 py-24">
+        <div className="shell">
+          <SectionHead
+            eyebrow="Industries"
+            title="Tuned to your market, not a template"
+            sub="We have shipped work across these sectors — the playbook changes with the buyer."
+          />
+          <div className="mx-auto mt-11 flex max-w-4xl flex-wrap justify-center gap-3">
+            {industries.map((n, i) => (
+              <Reveal key={n} delay={Math.min(i * 0.03, 0.3)}>
+                <span className="rounded-full border border-hairline bg-surface px-5 py-2.5 text-sm font-semibold text-white/80 transition hover:border-accent/50 hover:text-accent">
+                  {n}
+                </span>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Testimonials ─────────────────────────────────────── */}
+      <section className="py-24">
+        <div className="shell">
+          <SectionHead eyebrow="Client words" title="What it is like to work with us" />
+          <Testimonials />
+        </div>
+      </section>
+
+      {/* ── FAQ ──────────────────────────────────────────────── */}
+      <section className="border-t border-hairline bg-ink-2 py-24">
+        <div className="shell">
+          <SectionHead eyebrow="Questions" title="Got questions? We have answers" />
+          <Faq items={faqs.slice(0, 7)} />
+        </div>
+      </section>
+
+      <CtaBlock />
     </>
   );
 }

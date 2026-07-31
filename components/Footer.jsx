@@ -1,69 +1,98 @@
-import Logo from "./Logo";
+import Link from "next/link";
+import Logo from "@/components/Logo";
+import Icon from "@/components/Icon";
+import { services, site } from "@/lib/site";
 
-const offices = [
-  { city: "USA", line: "New York, NY", phone: "+1 (555) 010-2040" },
-  { city: "UK", line: "London", phone: "+44 20 7946 0102" },
-  { city: "Australia", line: "Sydney", phone: "+61 2 8006 1020" },
-  { city: "Pakistan", line: "Lahore", phone: "+92 42 3200 1020" },
+// No address, no phone number, no printed email (RULES.md §1–3).
+// Every "get in touch" path leads to the contact form.
+const quickLinks = [
+  { label: "Who We Are", href: "/about" },
+  { label: "All Services", href: "/services" },
+  { label: "Our Work", href: "/work" },
+  { label: "Contact", href: "/contact" },
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Terms of Use", href: "/terms" },
+];
+
+const socials = [
+  { name: "LinkedIn", icon: "linkedin" },
+  { name: "Facebook", icon: "facebook" },
+  { name: "Instagram", icon: "instagram" },
+  { name: "X", icon: "x" },
 ];
 
 export default function Footer() {
   return (
-    <footer id="careers" className="scroll-mt-24 border-t border-slate-100 bg-white py-14">
-      <div className="mx-auto grid max-w-7xl gap-10 px-6 md:grid-cols-4">
-        <div className="md:col-span-2">
-          <Logo />
-          <p className="mt-4 max-w-sm text-slate-500">
-            A full-service digital agency building web, mobile, design and marketing
-            solutions for ambitious teams worldwide since 2016.
+    <footer className="relative overflow-hidden border-t border-hairline bg-ink-2">
+      <div className="shell relative py-16">
+        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+          <div className="max-w-sm">
+            <Logo />
+            <p className="mt-5 text-[15px] leading-relaxed text-muted">{site.blurb}</p>
+            <Link href="/contact" className="btn btn-ghost mt-6 !py-3 !text-[14px]">
+              <Icon name="mail" size={16} />
+              Message us
+            </Link>
+          </div>
+
+          <div>
+            <h3 className="text-[13px] font-bold uppercase tracking-[0.16em] text-white">Services</h3>
+            <ul className="mt-5 space-y-3">
+              {services.map((s) => (
+                <li key={s.slug}>
+                  <Link href={`/services/${s.slug}`} className="text-[15px] text-muted transition hover:text-accent">
+                    {s.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-[13px] font-bold uppercase tracking-[0.16em] text-white">Company</h3>
+            <ul className="mt-5 space-y-3">
+              {quickLinks.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="text-[15px] text-muted transition hover:text-accent">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-[13px] font-bold uppercase tracking-[0.16em] text-white">Get in touch</h3>
+            <p className="mt-5 text-[15px] leading-relaxed text-muted">
+              We keep one channel so nothing gets lost: send the contact form and it lands straight in our inbox.
+            </p>
+            <Link href="/contact" className="mt-4 inline-flex items-center gap-2 text-[15px] font-bold text-accent">
+              Open the contact form
+              <Icon name="arrow" size={15} strokeWidth={2} />
+            </Link>
+
+            <ul className="mt-7 flex gap-2.5">
+              {socials.map((s) => (
+                <li key={s.name}>
+                  <a
+                    href="#"
+                    aria-label={s.name}
+                    className="grid h-10 w-10 place-items-center rounded-full border border-hairline text-white/70 transition hover:border-accent hover:text-accent"
+                  >
+                    <Icon name={s.icon} size={17} />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-hairline pt-7 sm:flex-row">
+          <p className="text-[13px] text-muted">
+            © {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>
-          <div className="mt-5 flex gap-3">
-            {["in", "f", "X", "ig"].map((s) => (
-              <a
-                key={s}
-                href="#"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-sm text-slate-500 transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
-              >
-                {s}
-              </a>
-            ))}
-          </div>
-
-          <div className="mt-8 grid grid-cols-2 gap-4">
-            {offices.map((o) => (
-              <div key={o.city} className="rounded-xl border border-slate-100 bg-[var(--bg-soft)] p-4">
-                <div className="font-semibold text-[var(--ink)]">{o.city}</div>
-                <div className="text-sm text-slate-500">{o.line}</div>
-                <div className="text-sm text-slate-500">{o.phone}</div>
-              </div>
-            ))}
-          </div>
+          <p className="text-[13px] text-muted">Digital innovation since {site.founded}</p>
         </div>
-
-        <div>
-          <h4 className="font-semibold text-[var(--ink)]">Company</h4>
-          <ul className="mt-4 space-y-2 text-slate-500">
-            <li><a href="#about" className="hover:text-[var(--accent)]">Who We Are</a></li>
-            <li><a href="#work" className="hover:text-[var(--accent)]">Portfolio</a></li>
-            <li><a href="#careers" className="hover:text-[var(--accent)]">Careers</a></li>
-            <li><a href="#contact" className="hover:text-[var(--accent)]">Contact Us</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 className="font-semibold text-[var(--ink)]">Services</h4>
-          <ul className="mt-4 space-y-2 text-slate-500">
-            <li><a href="#services" className="hover:text-[var(--accent)]">Web Development</a></li>
-            <li><a href="#services" className="hover:text-[var(--accent)]">App Development</a></li>
-            <li><a href="#services" className="hover:text-[var(--accent)]">Graphic Designing</a></li>
-            <li><a href="#services" className="hover:text-[var(--accent)]">Digital Marketing</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div className="mx-auto mt-12 flex max-w-7xl flex-col items-center justify-between gap-3 border-t border-slate-100 px-6 pt-6 text-sm text-slate-400 md:flex-row">
-        <span>© {new Date().getFullYear()} CrownPeak Global. All rights reserved.</span>
-        <span>hello@crownpeakglobal.com</span>
       </div>
     </footer>
   );

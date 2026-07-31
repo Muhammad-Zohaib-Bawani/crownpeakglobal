@@ -1,17 +1,20 @@
 "use client";
+
 import { motion } from "framer-motion";
 
-// Reusable scroll-reveal wrapper. ponytail: one wrapper, reused everywhere.
-export default function Reveal({ children, delay = 0, y = 40, className = "" }) {
+// Scroll reveal: fade + 16px rise, once, honours prefers-reduced-motion.
+// RULES.md §4 — motion stays subtle everywhere.
+export default function Reveal({ children, delay = 0, y = 16, className = "", as = "div" }) {
+  const MotionTag = motion[as] || motion.div;
   return (
-    <motion.div
+    <MotionTag
+      className={className}
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, ease: "easeOut", delay }}
-      className={className}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
-    </motion.div>
+    </MotionTag>
   );
 }
