@@ -1,33 +1,22 @@
-"use client";
-
-// Tech-stack wordmarks rendered as an animated marquee.
-const brands = ["PHP", "Bootstrap", "jQuery", "WordPress", "Adobe", "Google Analytics", "Laravel", "React"];
-
-function BrandMark({ name }) {
+// CSS-only infinite marquee: children rendered twice, track translated -50%.
+export default function Marquee({ items, className = "" }) {
+  const row = [...items, ...items];
   return (
-    <div className="flex shrink-0 items-center gap-2 px-8 text-slate-500 opacity-80 transition hover:text-[var(--accent)] hover:opacity-100">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-        <path d="M2 19 L8 7 L12 13 L16 4 L22 19 Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
-      </svg>
-      <span className="text-lg font-bold tracking-tight">{name}</span>
-    </div>
-  );
-}
-
-export default function Marquee() {
-  const row = [...brands, ...brands];
-  return (
-    <section className="border-y border-slate-100 bg-white py-10">
-      <p className="mb-6 text-center text-xs uppercase tracking-[0.3em] text-slate-400">
-        Technologies we work with
-      </p>
-      <div className="relative overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_10%,#000_90%,transparent)]">
-        <div className="flex w-max animate-marquee">
-          {row.map((b, i) => (
-            <BrandMark key={i} name={b} />
-          ))}
-        </div>
+    <div className={`marquee relative overflow-hidden ${className}`}>
+      <div className="marquee-track items-center gap-14">
+        {row.map((src, i) => (
+          <img
+            key={`${src}-${i}`}
+            src={src}
+            alt=""
+            aria-hidden="true"
+            className="h-12 w-auto shrink-0 opacity-45 grayscale transition hover:opacity-100 hover:grayscale-0 md:h-14"
+          />
+        ))}
       </div>
-    </section>
+      {/* edge fade so logos dissolve instead of clipping */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-ink to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-ink to-transparent" />
+    </div>
   );
 }

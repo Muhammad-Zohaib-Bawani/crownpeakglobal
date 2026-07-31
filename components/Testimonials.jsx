@@ -1,46 +1,61 @@
 "use client";
-import { motion } from "framer-motion";
-import Reveal from "./Reveal";
 
-const quotes = [
-  { text: "They rebuilt our website and ran our ads — leads tripled in three months. Fantastic team.", name: "Sarah Lin", role: "Founder, NovaBank" },
-  { text: "The logo and brand identity they designed nailed our vision on the first try. Highly recommend.", name: "Marcus Reid", role: "Owner, Lumen Store" },
-  { text: "Our app was delivered on time and bug-free. Communication was clear the whole way through.", name: "Dr. Ana Costa", role: "CEO, Zephyr Health" },
-  { text: "SEO and content work put us on page one for our main keywords. Traffic keeps climbing.", name: "James Okafor", role: "Director, Orbit CRM" },
-  { text: "Social media management freed up our time and grew our following massively. Worth every penny.", name: "Priya Nair", role: "Manager, Aero Fit" },
-];
+import { useRef } from "react";
+import Icon from "@/components/Icon";
+import { testimonials } from "@/lib/site";
 
+// Scroll-snap rail + arrow buttons. No carousel dependency.
 export default function Testimonials() {
-  return (
-    <section className="mx-auto max-w-7xl px-6 py-28">
-      <Reveal>
-        <p className="text-center text-sm font-semibold uppercase tracking-[0.3em] text-[var(--accent)]">
-          Testimonials
-        </p>
-        <h2 className="mx-auto mt-3 max-w-2xl text-center text-4xl font-extrabold text-[var(--ink)] md:text-5xl">
-          What our <span className="text-gradient">clients say</span>
-        </h2>
-      </Reveal>
+  const rail = useRef(null);
 
-      <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {quotes.map((q, i) => (
-          <Reveal key={q.name} delay={i * 0.08}>
-            <motion.figure whileHover={{ y: -6 }} className="glass h-full rounded-3xl p-7">
-              <div className="mb-4 text-4xl leading-none text-gradient">&ldquo;</div>
-              <blockquote className="text-slate-700">{q.text}</blockquote>
-              <figcaption className="mt-6 flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-[var(--accent)] to-[var(--accent-2)] font-bold text-white">
-                  {q.name.charAt(0)}
-                </div>
-                <div>
-                  <div className="font-semibold text-[var(--ink)]">{q.name}</div>
-                  <div className="text-sm text-slate-500">{q.role}</div>
-                </div>
-              </figcaption>
-            </motion.figure>
-          </Reveal>
+  const scrollBy = (dir) => {
+    const el = rail.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * (el.clientWidth * 0.8), behavior: "smooth" });
+  };
+
+  return (
+    <div className="mt-12">
+      <div
+        ref={rail}
+        className="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {testimonials.map((t) => (
+          <figure
+            key={t.name}
+            className="card w-[86vw] shrink-0 snap-start p-7 sm:w-[420px]"
+          >
+            <Icon name="spark" size={22} className="text-accent" />
+            <blockquote className="mt-5 text-[16px] leading-relaxed text-white/85">“{t.quote}”</blockquote>
+            <figcaption className="mt-7 flex items-center gap-3.5 border-t border-hairline pt-5">
+              <img src={t.photo} alt="" aria-hidden="true" className="h-11 w-11 rounded-full object-cover grayscale" />
+              <span>
+                <span className="block text-sm font-bold text-white">{t.name}</span>
+                <span className="block text-[13px] text-muted">{t.role}</span>
+              </span>
+            </figcaption>
+          </figure>
         ))}
       </div>
-    </section>
+
+      <div className="mt-6 flex justify-center gap-3">
+        <button
+          type="button"
+          onClick={() => scrollBy(-1)}
+          aria-label="Previous testimonials"
+          className="grid h-11 w-11 place-items-center rounded-full border border-hairline text-white transition hover:border-accent hover:text-accent"
+        >
+          <Icon name="arrow" size={18} className="rotate-180" />
+        </button>
+        <button
+          type="button"
+          onClick={() => scrollBy(1)}
+          aria-label="Next testimonials"
+          className="grid h-11 w-11 place-items-center rounded-full border border-hairline text-white transition hover:border-accent hover:text-accent"
+        >
+          <Icon name="arrow" size={18} />
+        </button>
+      </div>
+    </div>
   );
 }
