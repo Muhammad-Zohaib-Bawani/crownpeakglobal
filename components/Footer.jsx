@@ -3,8 +3,7 @@ import Logo from "@/components/Logo";
 import Icon from "@/components/Icon";
 import { services, site } from "@/lib/site";
 
-// No address, no phone number, no printed email (RULES.md §1–3).
-// Every "get in touch" path leads to the contact form.
+// No address, no printed email (RULES.md §1–3). Phone + WhatsApp allowed (§2).
 const quickLinks = [
   { label: "Who We Are", href: "/about" },
   { label: "All Services", href: "/services" },
@@ -63,9 +62,21 @@ export default function Footer() {
 
           <div>
             <h3 className="text-[13px] font-bold uppercase tracking-[0.16em] text-white">Get in touch</h3>
-            <p className="mt-5 text-[15px] leading-relaxed text-muted">
-              We keep one channel so nothing gets lost: send the contact form and it lands straight in our inbox.
-            </p>
+            <ul className="mt-5 space-y-3 text-[15px] text-muted">
+              <li>
+                <a href={site.tel} className="inline-flex items-center gap-2.5 transition hover:text-accent">
+                  <Icon name="phone" size={16} /> {site.phone}
+                </a>
+              </li>
+              <li>
+                <a href={site.whatsapp} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 transition hover:text-accent">
+                  <Icon name="whatsapp" size={16} /> WhatsApp us
+                </a>
+              </li>
+              <li className="inline-flex items-center gap-2.5">
+                <Icon name="pin" size={16} /> {site.regions}
+              </li>
+            </ul>
             <Link href="/contact" className="mt-4 inline-flex items-center gap-2 text-[15px] font-bold text-accent">
               Open the contact form
               <Icon name="arrow" size={15} strokeWidth={2} />

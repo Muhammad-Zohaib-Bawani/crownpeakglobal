@@ -1,6 +1,8 @@
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Icon from "@/components/Icon";
+import { site } from "@/lib/site";
 
 export const metadata = {
   title: {
@@ -9,7 +11,6 @@ export const metadata = {
   },
   description:
     "Crown Peak Global is a full-service digital studio: branding, web and app development, content, SEO and paid growth — delivered by one team.",
-  icons: { icon: "/favicon.png" },
   openGraph: {
     title: "Crown Peak Global | Digital Solutions for Business Growth",
     description: "Branding, web and app development, content, SEO and paid growth — delivered by one team.",
@@ -40,6 +41,15 @@ export default function RootLayout({ children }) {
           {children}
         </main>
         <Footer />
+        <a
+          href={site.whatsapp}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Chat with us on WhatsApp"
+          className="fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-lg shadow-black/40 transition hover:scale-105"
+        >
+          <Icon name="whatsapp" size={28} />
+        </a>
       </body>
     </html>
   );
