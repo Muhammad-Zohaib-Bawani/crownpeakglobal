@@ -6,17 +6,17 @@ Hard rules for this site. Any new page or component must follow them.
 
 - No street address, suite number, city, postal code, or office list.
 - No "Our Offices" section, no map, no embedded Google Maps iframe.
-- Countries may be mentioned only as *coverage* ("teams across 4 time zones"), never as an address.
+- Countries may be mentioned only as *coverage* ("Serving clients across the United Kingdom"), never as an address.
 
-## 2. No phone number anywhere
+## 2. One phone number, via `lib/site.js` only
 
-- No `tel:` links, no WhatsApp links, no floating call button.
-- No phone field in any form.
-- No fax, no Skype, no phone in metadata / schema.org / footer / email templates.
+- The only number is `site.phone` (+44 7400 759644), linked as `site.tel` / `site.whatsapp`.
+- Allowed: footer, contact box, and one floating WhatsApp button (bottom-right, in `app/layout.jsx`).
+- No phone field in any form. No fax, no Skype.
 
 ## 3. Contact happens through one contact box only
 
-- A single contact form is the only contact channel on the site.
+- The contact form is the primary channel; phone and WhatsApp (§2) are the only others.
 - Fields: **Name**, **Email**, **Company** (optional), **Service** (select), **Message**. Nothing else.
 - Submitting the form sends an email to the inbox in `CONTACT_TO_EMAIL`; the visitor's email is set as `reply_to`.
 - Public email addresses are **not** printed on the page — the form is the entry point.

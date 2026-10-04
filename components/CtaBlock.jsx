@@ -1,6 +1,7 @@
 import ContactForm from "@/components/ContactForm";
 import Icon from "@/components/Icon";
 import Reveal from "@/components/Reveal";
+import { site } from "@/lib/site";
 
 const promises = [
   { icon: "clock", text: "Reply by email within one business day" },
@@ -41,6 +42,18 @@ export default function CtaBlock({ id = "contact", title = "Tell us what you are
               </Reveal>
             ))}
           </ul>
+
+          <div className="mt-9 flex flex-wrap gap-3">
+            <a href={site.tel} className="btn btn-ghost !py-3 !text-[14px]">
+              <Icon name="phone" size={16} /> {site.phone}
+            </a>
+            <a href={site.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-ghost !py-3 !text-[14px]">
+              <Icon name="whatsapp" size={16} /> WhatsApp
+            </a>
+          </div>
+          <p className="mt-4 inline-flex items-center gap-2 text-[14px] text-muted">
+            <Icon name="pin" size={15} /> Serving clients across the {site.regions}
+          </p>
         </div>
 
         <Reveal delay={0.1} className="card p-6 sm:p-9">

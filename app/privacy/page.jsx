@@ -6,7 +6,7 @@ export const metadata = {
   description: "What Crown Peak Global collects through this website and how it is used.",
 };
 
-// RULES.md §1–3: no address, no phone, no printed email — contact goes to the form.
+// RULES.md §1–3: no address, no printed email — form, phone and WhatsApp only.
 const sections = [
   {
     h: "What we collect",
